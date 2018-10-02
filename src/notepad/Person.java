@@ -1,30 +1,11 @@
 package notepad;
 
-public class Person {
-
-    private static int count = 0;
-    // for all persons count = 0 as it si private
-    private int id;
+public class Person extends Record {
 
     private String name;
     private String surname;
     private String phone;
-
-    public Person() {
-        // id = 10;
-        count++;
-        // increases with avery new peron
-        id= count;
-
-    }
-
-    public int getId() {
-        return id;
-    }
-
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    private String email;
 
     public String getName() {
         return name;
@@ -50,13 +31,32 @@ public class Person {
         this.phone = phone;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
     @Override
     public String toString() {
         return "Person{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", phone='" + phone + '\'' +
-                '}' + count;
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean hasSubstring(String str) {
+        return name.contains(str)
+                || surname.contains(str)
+                || phone.contains(str)
+                || email.contains(str);
     }
 }
+
