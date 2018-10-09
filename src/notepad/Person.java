@@ -58,5 +58,21 @@ public class Person extends Record {
                 || phone.contains(str)
                 || email.contains(str);
     }
+
+    @Override
+    public void askQuestions() {
+        System.out.println("Enter name: ");
+        name = Main.askString();
+
+        System.out.println("Enter surname: ");
+        surname = Main.askString();
+
+        System.out.println("Enter phone number: ");
+        phone = Main.askString();
+ //       String phone = askPhone();
+
+        System.out.println("Enter email: ");
+        email = Main.askString();
+    }
 }
 

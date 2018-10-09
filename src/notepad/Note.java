@@ -1,5 +1,7 @@
 package notepad;
 
+import static notepad.Main.askString;
+
 public class Note extends Record {
     private String text;
 
@@ -22,6 +24,12 @@ public class Note extends Record {
     @Override
     public boolean hasSubstring(String str) {
         return text.contains(str);
+    }
+
+    @Override
+    public void askQuestions() {
+        System.out.println("Enter note: ");
+        String text = Main.askString();
     }
 }
 

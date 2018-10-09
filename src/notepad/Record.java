@@ -16,6 +16,9 @@ public abstract class Record {
     public abstract boolean hasSubstring(String str);
     // all note and person has such method.
 
+    public abstract void askQuestions();
+// vse nasledniki record dolxhni imetj askquestion. green bumba
+
     public int getId() {
         return id;
     }
