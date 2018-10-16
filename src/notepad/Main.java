@@ -3,9 +3,7 @@ package notepad;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public final static String DATE_FORMAT = "dd.MM.yyyy";
@@ -17,7 +15,7 @@ public class Main {
 
 
     static Scanner scanner = new Scanner(System.in);
-    static List<Record> records = new ArrayList<>();
+    static Map<Integer, Record> records = new LinkedHashMap<>();
     // person list
 
     public static void main(String[] args) {
@@ -47,12 +45,31 @@ public class Main {
                 case "find":
                     find();
                     break;
+                case "show":
+                    showById();
+                    break;
+                case "createalarm":
+                case "ca":   
+                    createAlarm();
+                    break;   
                 case "exit":
                     return;
                 default:
                     System.out.println("It isn't a command");
             }
         }
+    }
+
+    private static void createAlarm() {
+        var alarm = new Alarm();
+        addRecord(alarm);
+    }
+
+    private static void showById() {
+        System.out.println("Enter id to find");
+        int id = scanner.nextInt();
+        Record record = records.get(id);
+        System.out.println(records.get(id));
     }
 
     private static void createReminder() {
@@ -70,7 +87,7 @@ public class Main {
     private static void find() {
         System.out.println("Find what?");
         String str = askString();
-        for (Record r : records) {
+        for (Record r : records.values()) {
             if (r.hasSubstring(str)) {
                 System.out.println(r);
             }
@@ -83,13 +100,15 @@ public class Main {
 
         //       int index = -1;
 
-        for (int i = 0; i < records.size(); i++) {
-            Record p = records.get(i);
-            if (id == p.getId()) {
-                records.remove(i);
-                break;
-            }
-        }
+        records.remove(id);
+
+//        for (int i = 0; i < records.size(); i++) {
+//            Record p = records.get(i);
+//            if (id == p.getId()) {
+//                records.remove(i);
+//                break;
+//            }
+//        }
     }
 
     //       for (Person p : records) {
@@ -103,7 +122,7 @@ public class Main {
 
     private static void printList() {
         int count = 0;
-        for (Record p : records) {
+        for (Record p : records.values()) {
             System.out.println(p);
         }
     }
@@ -115,7 +134,7 @@ public class Main {
 
     private static void addRecord(Record p) {
         p.askQuestions();
-        records.add(p);
+        records.put(p.getId(), p);
         System.out.println(p);
     }
 
