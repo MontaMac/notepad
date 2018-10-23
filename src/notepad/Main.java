@@ -10,7 +10,7 @@ public class Main {
     public final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
     //final it is constant, static - mozhno obrashatsja vezde. Const are upper letters
 
-    public final static String TIME_FORMAT = "HH:MM";
+    public final static String TIME_FORMAT = "HH:mm";
     public final static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
 
@@ -49,13 +49,26 @@ public class Main {
                     showById();
                     break;
                 case "createalarm":
-                case "ca":   
+                case "ca":
                     createAlarm();
-                    break;   
+                case "expired":
+                    showExpired();
+                    break;
                 case "exit":
                     return;
                 default:
                     System.out.println("It isn't a command");
+            }
+        }
+    }
+
+    private static void showExpired() {
+        for (Record r : records.values()) {
+            if(r instanceof Expirable) {
+                Expirable e = (Expirable) r;
+                if (e.isExpired()) {
+                    System.out.println(r);
+                }
             }
         }
     }
